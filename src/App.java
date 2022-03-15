@@ -13,25 +13,28 @@ public class App {
         int answer = 0;
         int len=s.length();
         for(int i=1;i<len;i++){
+            String beforeString="";
             for(int ii=0;ii<len;ii+=i){
                 //System.out.println("i:"+i);
                 //System.out.println("ii:"+ii);
                 int next=ii+i;
-                if(next>len-1){
+                if(next>len){
                     next=len-1;
                 }
                 String subString=s.substring(ii, next);
-                //System.out.println(subString);
-                if(arr.containsKey(subString)){
-                    int num=arr.get(subString);
-                    num+=1;
-                    arr.replace(subString, num);
+               // System.out.println(subString);
+                if(beforeString.equals("")){
+                    beforeString=subString;
+                    ii=ii+i;
+                }else if(!beforeString.equals(subString)){
+                    beforeString=subString;
                 }else{
-                    arr.put(subString, 1);
+                    //System.out.println(subString);
+                    ii=ii+i;
                 }
+                System.out.println(beforeString);
             }
-            System.out.println(arr.toString());
-            arr.clear();
+
         }
         return answer;
     }
