@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 public class App {
     public static void main(String[] args) throws Exception {
-       String s="aabbaccc";
+       String s="abcabcabcabcdededededede";
         System.out.println(solution(s));
     }
     public static int solution(String s) {
