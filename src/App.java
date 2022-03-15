@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 public class App {
     public static void main(String[] args) throws Exception {
-       String s="abcabcabcabcdededededede";
+       String s="ababcdcdababcdcd";
         System.out.println(solution(s));
     }
     public static int solution(String s) {
@@ -18,29 +18,33 @@ public class App {
             String beforeString="";
             String other="";
             for(int ii=0;ii<len;ii+=i){
-                //System.out.println("i:"+i);
-                //System.out.println("ii:"+ii);
+               // System.out.println("i:"+i);
+               // System.out.println("ii:"+ii);
                 int next=ii+i;
                 if(next>len){
                     next=len;
                 }
                 String subString=s.substring(ii, next);
-                //System.out.println(subString);
-                if(beforeString.equals(subString)){
-                    int num=arr.get(beforeString);
-                    num=num+1;
-                    arr.put(beforeString, num);
-                }else{
-                    if(!arr.containsKey(subString)){
-                        arr.put(subString, 1);
-                    }else{
-                        other=other+subString;
+                System.out.println("oriin:"+subString);
+                int num=1;
+                for(int iii=ii+i;iii<len;iii+=i){
+                    int next2=iii+i;
+                    if(next2>len){
+                        next2=len;
                     }
-                    beforeString=subString;
+                    String subString2=s.substring(iii, next2);
+                    System.out.println(subString2);
+                    if(subString.equals(subString2)){
+                        num+=1;
+                        ii=ii+i;
+                    }else{
+                        break;
+                    }
                 }
+                System.out.println(num);
             }
             System.out.println(arr.toString());
-            System.out.println(other);
+            System.out.println("other: "+other);
             for(Entry<String, Integer> d:arr.entrySet()){
                 if(d.getValue()!=1){
                     other=other+d.getValue()+d.getKey();    
@@ -48,7 +52,7 @@ public class App {
                     other=other+d.getKey();    
                 }
             }
-            System.out.println(other);
+            //System.out.println(other);
             if(other.length()<answer){
                 answer=other.length();
             }
