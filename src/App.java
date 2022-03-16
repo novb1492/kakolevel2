@@ -44,21 +44,20 @@ public class App {
             }
             names.put(id.getKey(), name);
         }
-        int len=record.length;
-        for(int i=0;i<len;i++){
-            String infors=record[i];
-            String[] inforArr=infors.split(" ");
+        int num=0;
+        for(String s:record){
+            String[] inforArr=s.split(" ");
             String name=names.get(inforArr[1]);
             String state=inforArr[0];
-            System.out.println("state: "+state);
-            if(state.equals("Enter")){
+            if(state.equals("Change")){
+                continue;
+            }else if(state.equals("Enter")){
                 name=name+"님이 들어왔습니다.";
             }else if(state.equals("Leave")){
                 name=name+"님이 나갔습니다.";
-            }else{
-                continue;
             }
-            answer[i]=name;
+            answer[num]=name;
+            num+=1;
         }
         return answer;
     }
