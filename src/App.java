@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -26,7 +27,20 @@ public class App {
                 ids.put(id, infors);
             }
         }
-        System.out.println(ids.toString());
+        Map<String,String>names=new HashMap<>();
+        for(Entry<String, List<String[]>> id:ids.entrySet()){
+            String name=null;
+            List<String[]>infors=id.getValue();
+            for(String[] infor:infors){
+                String state=infor[0];
+                if(!state.equals("Leave")){
+                    name=infor[2];
+                }
+            }
+            System.out.println(name);
+            names.put(id.getKey(), name);
+        }
+        System.out.println(names.toString());
         return answer;
     }
 }
