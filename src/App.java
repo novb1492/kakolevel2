@@ -13,7 +13,7 @@ public class App {
         System.out.println(Arrays.toString(solution(s)));
     }
     public static String[] solution(String[] record) {
-        String[] answer = new String[5];
+        int size=0;
         Map<String,List<String[]>>ids=new HashMap<>();
         for(String r:record){
             String[] recordDetails=r.split(" ");
@@ -26,7 +26,12 @@ public class App {
                 infors.add(recordDetails);
                 ids.put(id, infors);
             }
+            String state=recordDetails[0];
+            if(state.equals("Enter")||state.equals("Leave")){
+                size+=1;
+            }
         }
+        String[] answer = new String[size];
         Map<String,String>names=new HashMap<>();
         for(Entry<String, List<String[]>> id:ids.entrySet()){
             String name=null;
@@ -37,10 +42,24 @@ public class App {
                     name=infor[2];
                 }
             }
-            System.out.println(name);
             names.put(id.getKey(), name);
         }
-        System.out.println(names.toString());
+        int len=record.length;
+        for(int i=0;i<len;i++){
+            String infors=record[i];
+            String[] inforArr=infors.split(" ");
+            String name=names.get(inforArr[1]);
+            String state=inforArr[0];
+            System.out.println("state: "+state);
+            if(state.equals("Enter")){
+                name=name+"님이 들어왔습니다.";
+            }else if(state.equals("Leave")){
+                name=name+"님이 나갔습니다.";
+            }else{
+                continue;
+            }
+            answer[i]=name;
+        }
         return answer;
     }
 }
