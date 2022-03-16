@@ -12,7 +12,21 @@ public class App {
         System.out.println(Arrays.toString(solution(s)));
     }
     public static String[] solution(String[] record) {
-        String[] answer = {};
+        String[] answer = new String[5];
+        Map<String,List<String[]>>ids=new HashMap<>();
+        for(String r:record){
+            String[] recordDetails=r.split(" ");
+            String id=recordDetails[1];
+            List<String[]>infors=new ArrayList<>();
+            if(ids.containsKey(id)){
+                infors=ids.get(id);
+                infors.add(recordDetails);
+            }else{
+                infors.add(recordDetails);
+                ids.put(id, infors);
+            }
+        }
+        System.out.println(ids.toString());
         return answer;
     }
 }
