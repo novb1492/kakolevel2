@@ -16,21 +16,7 @@ public class App {
     public static String[] solution(String[] orders, int[] course) {
         String[] answer = {};
         Map<String,Integer>arr=new HashMap<>();
-        for(String order:orders){
-            char[] chars=order.toCharArray();
-            for(char c:chars){
-                String cc=String.valueOf(c);
-                if(arr.containsKey(cc)){
-                    int num=arr.get(cc);
-                    num+=1;
-                    arr.replace(cc, num);
-                }else{
-                    arr.put(cc, 1);
-                }
-            }
-        }
-        System.out.println(arr.toString());
-    
+        
         return answer;
     }
 }
