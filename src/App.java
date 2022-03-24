@@ -15,8 +15,38 @@ public class App {
     }
     public static String[] solution(String[] orders, int[] course) {
         String[] answer = {};
-        Map<String,Integer>arr=new HashMap<>();
-        
+        List<Character>menuArr=new ArrayList<>();
+        for(String order:orders){
+            char[] menus=order.toCharArray();
+            for(char menu:menus){
+                if(!menuArr.contains(menu)){
+                    menuArr.add(menu);
+                }
+            }
+        }
+        System.out.println(menuArr.toString());
+        Map<Integer,String>arr2=new HashMap<>();
+        int len=menuArr.size();
+        for(int num:course){
+            for(int i=0;i<len;i++){
+                int lange=i+num;
+                if(lange>=len){
+                    break;
+                }
+                List<Character>arr=menuArr.subList(i, lange);
+                int num2=0;
+                for(String order:orders){
+                    System.out.println(arr.toString());
+                    System.out.println("order: "+order);
+                    for(Character cc:arr){
+                       if(order.indexOf(cc)!=-1){
+                           
+                       }
+                    }
+                }
+                String mm="";
+            }
+        }
         return answer;
     }
 }
