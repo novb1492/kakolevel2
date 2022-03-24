@@ -27,26 +27,14 @@ public class App {
         System.out.println(menuArr.toString());
         Map<Integer,String>arr2=new HashMap<>();
         int len=menuArr.size();
-        for(int num:course){
-            for(int i=0;i<len;i++){
-                int lange=i+num;
-                if(lange>=len){
-                    break;
-                }
-                List<Character>arr=menuArr.subList(i, lange);
-                int num2=0;
-                for(String order:orders){
-                    System.out.println(arr.toString());
-                    //System.out.println("order: "+order);
-                    for(Character cc:arr){
-                       if(order.indexOf(cc)!=-1){
-                       // System.out.println("char: "+cc);
-                       }
-                    }
-                }
-                String mm="";
+        for(int i=0;i<len;i++){
+            for(int ii=i+1;ii<len;ii++){
+                List<Character>menu=menuArr.subList(i, ii+1);
+                
+                System.out.println(menuArr.subList(i, ii+1));
             }
         }
+    
         return answer;
     }
 }
