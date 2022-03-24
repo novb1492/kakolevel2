@@ -37,10 +37,10 @@ public class App {
                 int num2=0;
                 for(String order:orders){
                     System.out.println(arr.toString());
-                    System.out.println("order: "+order);
+                    //System.out.println("order: "+order);
                     for(Character cc:arr){
                        if(order.indexOf(cc)!=-1){
-                           
+                       // System.out.println("char: "+cc);
                        }
                     }
                 }
