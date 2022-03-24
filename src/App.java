@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -25,13 +26,23 @@ public class App {
             }
         }
         System.out.println(menuArr.toString());
+        List<Integer> intList= Arrays.stream(course)
+                                    .boxed()
+                                    .collect(Collectors.toList());
+        System.out.println(intList.toString());
         Map<Integer,String>arr2=new HashMap<>();
         int len=menuArr.size();
         for(int i=0;i<len;i++){
             for(int ii=i+1;ii<len;ii++){
-                List<Character>menu=menuArr.subList(i, ii+1);
+                int len2=ii+1;
+                List<Character>menu=menuArr.subList(i, len2);
+                if(intList.contains(menu.size())){
                 
-                System.out.println(menuArr.subList(i, ii+1));
+                    System.out.println(menu.toString());
+                }
+               // List<Character>menu=menuArr.subList(i, len2);
+                
+                //System.out.println(menu.toString());
             }
         }
     
