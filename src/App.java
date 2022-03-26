@@ -9,6 +9,11 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class App {
+    static List<Character>menuArr=new ArrayList<>();
+    static Map<Character,Boolean>flag=new HashMap<>();
+    static int num=0;
+    static int num2=0;
+    static List<String>menuStrings=new ArrayList<>();
     public static void main(String[] args) throws Exception {
        String[] s={"ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"};
        int[] c={2,3,4};
@@ -16,7 +21,7 @@ public class App {
     }
     public static String[] solution(String[] orders, int[] course) {
         String[] answer = {};
-        List<Character>menuArr=new ArrayList<>();
+        menuArr=new ArrayList<>();
         for(String order:orders){
             char[] menus=order.toCharArray();
             for(char menu:menus){
@@ -26,26 +31,13 @@ public class App {
             }
         }
         System.out.println(menuArr.toString());
-        List<Integer> intList= Arrays.stream(course)
-                                    .boxed()
-                                    .collect(Collectors.toList());
-        System.out.println(intList.toString());
-        Map<Integer,String>arr2=new HashMap<>();
-        int len=menuArr.size();
-        for(int i=0;i<len;i++){
-            for(int ii=i+1;ii<len;ii++){
-                int len2=ii+1;
-                List<Character>menu=menuArr.subList(i, len2);
-                if(intList.contains(menu.size())){
-                
-                    System.out.println(menu.toString());
-                }
-               // List<Character>menu=menuArr.subList(i, len2);
-                
-                //System.out.println(menu.toString());
+        for(int c:course){
+            for(char menu:menuArr){
+               
             }
-        }
-    
+        } 
+        System.out.println(menuStrings.toString());
         return answer;
     }
+
 }
