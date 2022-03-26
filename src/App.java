@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class App {
     static List<Character>menuArr=new ArrayList<>();
-    static Map<Character,Boolean>flag=new HashMap<>();
+    static LinkedHashMap<String,Integer>menuAndNum=new LinkedHashMap<>();
     static int num2=0;
     static List<String>menuStrings=new ArrayList<>();
     private static List<String> combination;
@@ -34,10 +34,11 @@ public class App {
             }
 
         }
-       
+       System.out.println(menuAndNum.toString());
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,int num) {
+        //넘이 초과하는지 확인
         if(num>=menus.length){
             return;
         }
@@ -47,6 +48,13 @@ public class App {
         //System.out.println("str: "+str);
         if(len==str.length()){
             System.out.println(str);
+            int count=Optional.ofNullable(menuAndNum.get(str)).orElseGet(()->0);
+            if(count==0){
+                menuAndNum.put(str, 1);
+            }else{
+                count+=1;
+                menuAndNum.replace(str,  count);
+            }
             return;
         }
         num=num+1;
