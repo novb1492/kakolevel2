@@ -38,16 +38,20 @@ public class App {
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,int num) {
-        //넘이 초과하는지 확인
+        //끝에를 초과한다면 리턴
         if(num>=menus.length){
             return;
         }
+        //아니라면 그다음 문자열 붙히기
         str=str+menus[num];
-        //System.out.println("len: "+len);
-        //System.out.println("num: "+num);
-        //System.out.println("str: "+str);
+        System.out.println("num: "+num);
+        System.out.println("str: "+str);
+        //문자열 길이가 조건길이인지 확인
         if(len==str.length()){
-            System.out.println(str);
+            System.out.println("---------------------");
+            System.out.println("num: "+num);
+            System.out.println("str: "+str);
+            System.out.println("----------------------");
             int count=Optional.ofNullable(menuAndNum.get(str)).orElseGet(()->0);
             if(count==0){
                 menuAndNum.put(str, 1);
@@ -57,9 +61,13 @@ public class App {
             }
             return;
         }
+        //다음 문자열 위해 증가
         num=num+1;
+        //재귀호출
         for(int i=0;i<menus.length;i++){
             dfs(len, menus, str,num);
+            //호출이 끝났으면 다음 문자열 위해 
+            //ex) abc abf이렇게 
             num=num+1;
         }
 
