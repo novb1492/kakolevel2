@@ -48,10 +48,9 @@ public class App {
         System.out.println("str: "+str);
         //문자열 길이가 조건길이인지 확인
         if(len==str.length()){
-            System.out.println("---------------------");
+            System.out.println("정답");
             System.out.println("num: "+num);
             System.out.println("str: "+str);
-            System.out.println("----------------------");
             int count=Optional.ofNullable(menuAndNum.get(str)).orElseGet(()->0);
             if(count==0){
                 menuAndNum.put(str, 1);
@@ -69,6 +68,7 @@ public class App {
             //호출이 끝났으면 다음 문자열 위해 
             //ex) abc abf이렇게 
             num=num+1;
+            System.out.println("다음스텝");
         }
 
     }
