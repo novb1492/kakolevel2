@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class App {
     static List<Character>menuArr=new ArrayList<>();
     static Map<Character,Boolean>flag=new HashMap<>();
-    static int num=0;
     static int num2=0;
     static List<String>menuStrings=new ArrayList<>();
     public static void main(String[] args) throws Exception {
@@ -26,10 +25,24 @@ public class App {
             char[] menus=order.toCharArray();
             Arrays.sort(menus);
             System.out.println(Arrays.toString(menus));
-            
+            for(int c:course){
+                dfs(c, menus, "",0);
+            }
         }
        
         return answer;
     }
+    private static void dfs(int len,char[]menus,String str,int num) {
+        System.out.println("num: "+num);
+        if(len==str.length()){
+            System.out.println(str);
+            return;
+        }
+        str=str+menus[num];
+        for(int i=0;i<menus.length;i++){
+            num=num+1;
+            dfs(len, menus, str,num);
+        }
 
+    }
 }
