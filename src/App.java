@@ -42,9 +42,9 @@ public class App {
             return;
         }
         str=str+menus[num];
-        System.out.println("len: "+len);
-        System.out.println("num: "+num);
-        System.out.println("str: "+str);
+        //System.out.println("len: "+len);
+        //System.out.println("num: "+num);
+        //System.out.println("str: "+str);
         if(len==str.length()){
             System.out.println(str);
             return;
