@@ -24,19 +24,11 @@ public class App {
         menuArr=new ArrayList<>();
         for(String order:orders){
             char[] menus=order.toCharArray();
-            for(char menu:menus){
-                if(!menuArr.contains(menu)){
-                    menuArr.add(menu);
-                }
-            }
+            Arrays.sort(menus);
+            System.out.println(Arrays.toString(menus));
+            
         }
-        System.out.println(menuArr.toString());
-        for(int c:course){
-            for(char menu:menuArr){
-               
-            }
-        } 
-        System.out.println(menuStrings.toString());
+       
         return answer;
     }
 
