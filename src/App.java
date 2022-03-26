@@ -13,6 +13,7 @@ public class App {
     static Map<Character,Boolean>flag=new HashMap<>();
     static int num2=0;
     static List<String>menuStrings=new ArrayList<>();
+    private static List<String> combination;
     public static void main(String[] args) throws Exception {
        String[] s={"ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"};
        int[] c={2,3,4};
@@ -25,24 +26,37 @@ public class App {
             char[] menus=order.toCharArray();
             Arrays.sort(menus);
             System.out.println(Arrays.toString(menus));
-            for(int c:course){
-                dfs(c, menus, "",0);
+            int len=menus.length;
+            for(int i=0;i<len;i++){
+                for(int c:course){
+                    dfs(c, menus,String.valueOf(menus[i]),i+1);
+                }
             }
+
         }
        
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,int num) {
+        if(num>=menus.length){
+            return;
+        }
+        str=str+menus[num];
+        System.out.println("len: "+len);
         System.out.println("num: "+num);
+        System.out.println("str: "+str);
         if(len==str.length()){
             System.out.println(str);
             return;
         }
-        str=str+menus[num];
+        num=num+1;
         for(int i=0;i<menus.length;i++){
-            num=num+1;
             dfs(len, menus, str,num);
+            num=num+1;
         }
 
     }
+    //abcfg
+    //0a1ab*
+
 }
