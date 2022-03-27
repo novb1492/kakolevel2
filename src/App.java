@@ -29,7 +29,7 @@ public class App {
             int len=menus.length;
             for(int i=0;i<len;i++){
                 for(int c:course){
-                    dfs(c, menus,String.valueOf(menus[i]));
+                    dfs(c, menus,String.valueOf(menus[i]),menus[i]);
                 }
             }
 
@@ -37,7 +37,7 @@ public class App {
        System.out.println(menuAndNum.toString());
         return answer;
     }
-    private static void dfs(int len,char[]menus,String str) {
+    private static void dfs(int len,char[]menus,String str,char menu) {
         System.out.println("str: "+str);
 
         //문자열 길이가 조건길이인지 확인
@@ -56,7 +56,10 @@ public class App {
 
         //재귀호출
         for(int i=0;i<menus.length;i++){
-            dfs(len, menus, str+menus[i]);
+            if(menus[i]==menu){
+                continue;
+            }
+            dfs(len, menus, str+menus[i],menus[i]);
             System.out.println("다음스텝");
             
         }
