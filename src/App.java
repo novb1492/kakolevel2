@@ -29,7 +29,7 @@ public class App {
             int len=menus.length;
             for(int i=0;i<len;i++){
                 for(int c:course){
-                    dfs(c, menus,String.valueOf(menus[i]),i+1);
+                    dfs(c, menus,String.valueOf(menus[i]));
                 }
             }
 
@@ -37,16 +37,12 @@ public class App {
        System.out.println(menuAndNum.toString());
         return answer;
     }
-    private static void dfs(int len,char[]menus,String str,int num) {
-        System.out.println("num: "+num);
+    private static void dfs(int len,char[]menus,String str) {
         System.out.println("str: "+str);
-        if(num>=menus.length){
-            return;
-        }
+
         //문자열 길이가 조건길이인지 확인
         if(len==str.length()){
             System.out.println("정답");
-            System.out.println("num: "+num);
             System.out.println("str: "+str);
             int count=Optional.ofNullable(menuAndNum.get(str)).orElseGet(()->0);
             if(count==0){
@@ -57,16 +53,10 @@ public class App {
             }
             return;
         }
-        str=str+menus[num];
-        num=num+1;
+
         //재귀호출
         for(int i=0;i<menus.length;i++){
-            dfs(len, menus, str,num);
-            if(num>=menus.length){
-                continue;
-            }
-            str=str+menus[num];
-            num=num+1;
+            dfs(len, menus, str+menus[i]);
             System.out.println("다음스텝");
             
         }
