@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,8 +16,8 @@ public class App {
     static List<String>menuStrings=new ArrayList<>();
     static Map<Integer,Integer>topInLen=new HashMap<>();
     public static void main(String[] args) throws Exception {
-       String[] s={"XYZ", "XWY", "WXA"};
-       int[] c={2,3,4};
+       String[] s={"ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD"};
+       int[] c={2,3,5};
         System.out.println(Arrays.toString(solution(s,c)));
     }
     public static String[] solution(String[] orders, int[] course) {
@@ -52,12 +53,16 @@ public class App {
                 topMenusInLen.add(menu);
             }
         }
+        Collections.sort(topMenusInLen);
         System.out.println(topMenusInLen.toString());
         //최소 두명이상에게 주문되었나확인하기
+        for(String order:orders){
+            
+        }
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,char menu,List<Character>already) {
-       // System.out.println("str: "+str);
+        System.out.println("str: "+str);
         //문자열 길이가 조건길이인지 확인
         if(len==str.length()){
             //System.out.println("정답");
@@ -71,10 +76,10 @@ public class App {
             }
             // 길이에 가장 많은 카운트 저장
             int count2=Optional.ofNullable(topInLen.get(len)).orElseGet(()->0);
-            if(count2<count){
+            if(count2<=count){
                 topInLen.put(len,count);
             }
-            //already.remove(already.indexOf(menu));
+            already.remove(already.indexOf(menu));
             return;
         }
         //재귀호출
