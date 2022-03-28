@@ -30,8 +30,11 @@ public class App {
             for(int i=0;i<len;i++){
                 for(int c:course){
                     List<Character>already=new ArrayList<>();
-                    already.add(menus[i]);
+                    for(int ii=0;ii<=i;ii++){
+                        already.add(menus[ii]);
+                    }
                     dfs(c, menus,String.valueOf(menus[i]),menus[i],already);
+                   already.clear();
                 }
             }
 
@@ -40,12 +43,12 @@ public class App {
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,char menu,List<Character>already) {
-        System.out.println("str: "+str);
+       // System.out.println("str: "+str);
 
         //문자열 길이가 조건길이인지 확인
         if(len==str.length()){
-            System.out.println("정답");
-            System.out.println("str: "+str);
+            //System.out.println("정답");
+            //System.out.println("str: "+str);
             int count=Optional.ofNullable(menuAndNum.get(str)).orElseGet(()->0);
             if(count==0){
                 menuAndNum.put(str, 1);
@@ -53,6 +56,7 @@ public class App {
                 count+=1;
                 menuAndNum.replace(str,  count);
             }
+            already.remove(already.indexOf(menu));
             return;
         }
 
@@ -64,8 +68,7 @@ public class App {
             }
             already.add(a);
             dfs(len, menus, str+menus[i],menus[i],already);
-            //already.remove(already.indexOf(menus[i]));
-            System.out.println("다음스텝");
+            //System.out.println("다음스텝");
             
         }
 
