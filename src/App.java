@@ -49,41 +49,20 @@ public class App {
         for(Entry<String, Integer> menuAndNum:menuAndNums.entrySet()){
             String menu=menuAndNum.getKey();
             int topCount=topInLen.get(menu.length());
+            if(topCount==1){
+                continue;
+            }
             if(topCount==menuAndNum.getValue()){
                 topMenusInLen.add(menu);
             }
         }
         Collections.sort(topMenusInLen);
-        System.out.println(topMenusInLen.toString());
-        List<String>removes=new ArrayList<>();
-        //최소 두명이상에게 주문되었나확인하기
-        for(String topMenu:topMenusInLen){
-            char[] topMenus=topMenu.toCharArray();
-            int num=0;
-            boolean flag=false;
-            for(char menu:topMenus){
-                for(String order:orders){
-                    if(order.contains(String.valueOf(menu))){
-                        num+=1;
-                    }
-                }
-                if(num<2){
-                    System.out.println(topMenu);
-                    flag=true;
-                    break;
-                }else{
-                    num=0;
-                }
-            }
-            if(flag){
-                removes.add(topMenu);
-            }
-        }
-        System.out.println(removes.toString());
+        //System.out.println(topMenusInLen.toString());
+        answer=topMenusInLen.toArray(new String[topMenusInLen.size()]);
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,char menu,List<Character>already) {
-        System.out.println("str: "+str);
+        //System.out.println("str: "+str);
         //문자열 길이가 조건길이인지 확인
         if(len==str.length()){
             //System.out.println("정답");
