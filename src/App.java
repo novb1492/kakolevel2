@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class App {
     static List<Character>menuArr=new ArrayList<>();
-    static LinkedHashMap<String,Integer>menuAndNum=new LinkedHashMap<>();
+    static LinkedHashMap<String,Integer>menuAndNums=new LinkedHashMap<>();
     static int num2=0;
     static List<String>menuStrings=new ArrayList<>();
     private static List<String> combination;
@@ -39,7 +39,10 @@ public class App {
             }
 
         }
-       System.out.println(menuAndNum.toString());
+        System.out.println(menuAndNums.toString());
+        for(Entry<String, Integer> menuAndNum:menuAndNums.entrySet()){
+                
+        }
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,char menu,List<Character>already) {
@@ -49,12 +52,12 @@ public class App {
         if(len==str.length()){
             //System.out.println("정답");
             //System.out.println("str: "+str);
-            int count=Optional.ofNullable(menuAndNum.get(str)).orElseGet(()->0);
+            int count=Optional.ofNullable(menuAndNums.get(str)).orElseGet(()->0);
             if(count==0){
-                menuAndNum.put(str, 1);
+                menuAndNums.put(str, 1);
             }else{
                 count+=1;
-                menuAndNum.replace(str,  count);
+                menuAndNums.replace(str,  count);
             }
             already.remove(already.indexOf(menu));
             return;
