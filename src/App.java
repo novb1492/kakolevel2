@@ -15,9 +15,9 @@ public class App {
     static int num2=0;
     static List<String>menuStrings=new ArrayList<>();
     public static void main(String[] args) throws Exception {
-       String[] s={"ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD"};
-       int[] c={2,3,5};
-        System.out.println(Arrays.toString(solution(s,c)));
+       String[] s={"ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"};
+       int[] c={2,3,4};
+        System.out.println("r: "+Arrays.toString(solution(s,c)));
     }
     public static String[] solution(String[] orders, int[] course) {
         String[] answer = {};
@@ -35,6 +35,7 @@ public class App {
                     for(int ii=0;ii<=i;ii++){
                         already.add(menus[ii]);
                     }
+                    System.out.println("--------------------------------");
                     dfs(c, menus,String.valueOf(menus[i]),menus[i],already);
                     already.clear();
                 }
@@ -54,7 +55,7 @@ public class App {
         
         List<String>topMenusInLen=new ArrayList<>();
         for(Entry<String, Integer> menuAndNum:menuAndNums.entrySet()){
-            if(menuAndNum.getValue()==topInLen.get(menuAndNum.getKey().length())&&menuAndNum.getValue()!=1){
+            if(menuAndNum.getValue()==topInLen.get(menuAndNum.getKey().length())&&menuAndNum.getValue()>=2){
                 topMenusInLen.add(menuAndNum.getKey());
             }
         }
@@ -79,16 +80,19 @@ public class App {
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,char menu,List<Character>already) {
-        //System.out.println("str: "+str);
+        System.out.println(already.toString());
+        System.out.println("str: "+str);
         //문자열 길이가 조건길이인지 확인
         if(len==str.length()){
-            //System.out.println("정답");
+           // System.out.println("정답");
             //System.out.println("str: "+str);
             int count=Optional.ofNullable(menuAndNums.get(str)).orElseGet(()->0);
             count++;
             menuAndNums.put(str, count);
             //재사용을 위해 지워줘야지 이전에 백준 false 처리 해줬던 것처럼
-            already.remove(already.indexOf(menu));
+            for(int i=1;i<already.size();i++){
+                already.remove(i);
+            }
             return;
         }
         //재귀호출
