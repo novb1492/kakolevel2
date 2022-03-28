@@ -14,18 +14,23 @@ public class App {
         Map<String,Integer>arr=new HashMap<>();
         int answer = s.length();
         int len=s.length();
+        //몇글자씩 잘라서 확인할지 최대 절반까지만 하면됨
         for(int i=1;i<=len/2;i++){
             String other="";
+            //문자열 끝이될때까지
             for(int ii=0;ii<len;ii+=i){
                 System.out.println("ii:"+ii);
                 int next=ii+i;
+                //초과한다면 최대값주기
                 if(next>len){
                     next=len;
                 }
                 System.out.println("next:"+next);
+                //시작 지점부터 종료지점자르기
                 String subString=s.substring(ii, next);
                 System.out.println("oriin:"+subString);
                 int num=1;
+                //잘른 개수만큼 점프해가면서 확인하기
                 for(int iii=ii+i;iii<len;iii+=i){
                     int next2=iii+i;
                     if(next2>len){
