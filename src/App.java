@@ -25,6 +25,8 @@ public class App {
         //경우의수가져오기
         for(String order:orders){
             char[] menus=order.toCharArray();
+            //이정렬이 있어야 
+            //밑에 a<menu조건식이 성립함
             Arrays.sort(menus);
             System.out.println(Arrays.toString(menus));
             int len=menus.length;
@@ -70,6 +72,7 @@ public class App {
         for(int i=0;i<menus.length;i++){
             char a=menus[i];
             //이미 있다면 혹은 이전 메뉴라면 무시 dfs 타지 않음
+            //위에 Arrays.sort(menus); 했기 때문에 a<menu로 잡아낸것
             if(str.contains(String.valueOf(a))||a<menu){
                 continue;
             }
