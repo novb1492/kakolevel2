@@ -29,7 +29,9 @@ public class App {
             int len=menus.length;
             for(int i=0;i<len;i++){
                 for(int c:course){
-                    dfs(c, menus,String.valueOf(menus[i]),menus[i]);
+                    List<Character>already=new ArrayList<>();
+                    already.add(menus[i]);
+                    dfs(c, menus,String.valueOf(menus[i]),menus[i],already);
                 }
             }
 
@@ -37,7 +39,7 @@ public class App {
        System.out.println(menuAndNum.toString());
         return answer;
     }
-    private static void dfs(int len,char[]menus,String str,char menu) {
+    private static void dfs(int len,char[]menus,String str,char menu,List<Character>already) {
         System.out.println("str: "+str);
 
         //문자열 길이가 조건길이인지 확인
@@ -56,10 +58,13 @@ public class App {
 
         //재귀호출
         for(int i=0;i<menus.length;i++){
-            if(menus[i]==menu){
+            char a=menus[i];
+            if(already.contains(a)){
                 continue;
             }
-            dfs(len, menus, str+menus[i],menus[i]);
+            already.add(a);
+            dfs(len, menus, str+menus[i],menus[i],already);
+            //already.remove(already.indexOf(menus[i]));
             System.out.println("다음스텝");
             
         }
