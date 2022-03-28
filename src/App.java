@@ -13,7 +13,7 @@ public class App {
     static LinkedHashMap<String,Integer>menuAndNums=new LinkedHashMap<>();
     static int num2=0;
     static List<String>menuStrings=new ArrayList<>();
-    private static List<String> combination;
+    static Map<Integer,Integer>topInLen=new HashMap<>();
     public static void main(String[] args) throws Exception {
        String[] s={"ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"};
        int[] c={2,3,4};
@@ -30,49 +30,55 @@ public class App {
             for(int i=0;i<len;i++){
                 for(int c:course){
                     List<Character>already=new ArrayList<>();
+                    //이전까지 넣었던 문자 제외 추가 이렇게 해야하나 싶다... 반복문 3개 좀 극혐
                     for(int ii=0;ii<=i;ii++){
                         already.add(menus[ii]);
                     }
                     dfs(c, menus,String.valueOf(menus[i]),menus[i],already);
-                   already.clear();
+                    already.clear();
                 }
             }
 
         }
         System.out.println(menuAndNums.toString());
+        System.out.println(topInLen.toString());
         for(Entry<String, Integer> menuAndNum:menuAndNums.entrySet()){
-                
+
         }
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,char menu,List<Character>already) {
        // System.out.println("str: "+str);
-
         //문자열 길이가 조건길이인지 확인
         if(len==str.length()){
             //System.out.println("정답");
             //System.out.println("str: "+str);
             int count=Optional.ofNullable(menuAndNums.get(str)).orElseGet(()->0);
-            if(count==0){
-                menuAndNums.put(str, 1);
+            count++;
+            if(count==1){
+                menuAndNums.put(str, count);
             }else{
-                count+=1;
                 menuAndNums.replace(str,  count);
             }
-            already.remove(already.indexOf(menu));
+            // 길이에 가장 많은 카운트 저장
+            int count2=Optional.ofNullable(topInLen.get(len)).orElseGet(()->0);
+            if(count2<count){
+                topInLen.put(len,count);
+            }
+            //already.remove(already.indexOf(menu));
             return;
         }
-
         //재귀호출
         for(int i=0;i<menus.length;i++){
             char a=menus[i];
+            //이미 있다면 무시
             if(already.contains(a)){
                 continue;
             }
+            //아니라면 넣어주기 중복 확인 방지
             already.add(a);
             dfs(len, menus, str+menus[i],menus[i],already);
-            //System.out.println("다음스텝");
-            
+            //System.out.println("다음스텝"); 
         }
 
     }
