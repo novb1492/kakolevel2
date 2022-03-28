@@ -15,13 +15,14 @@ public class App {
     static List<String>menuStrings=new ArrayList<>();
     static Map<Integer,Integer>topInLen=new HashMap<>();
     public static void main(String[] args) throws Exception {
-       String[] s={"ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"};
+       String[] s={"XYZ", "XWY", "WXA"};
        int[] c={2,3,4};
         System.out.println(Arrays.toString(solution(s,c)));
     }
     public static String[] solution(String[] orders, int[] course) {
         String[] answer = {};
         menuArr=new ArrayList<>();
+        //경우의수가져오기
         for(String order:orders){
             char[] menus=order.toCharArray();
             Arrays.sort(menus);
@@ -42,9 +43,17 @@ public class App {
         }
         System.out.println(menuAndNums.toString());
         System.out.println(topInLen.toString());
+        //가장많이 주문된 개수 분류하기
+        List<String>topMenusInLen=new ArrayList<>();
         for(Entry<String, Integer> menuAndNum:menuAndNums.entrySet()){
-
+            String menu=menuAndNum.getKey();
+            int topCount=topInLen.get(menu.length());
+            if(topCount==menuAndNum.getValue()){
+                topMenusInLen.add(menu);
+            }
         }
+        System.out.println(topMenusInLen.toString());
+        //최소 두명이상에게 주문되었나확인하기
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,char menu,List<Character>already) {
