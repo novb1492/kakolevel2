@@ -35,7 +35,7 @@ public class App {
                     for(int ii=0;ii<=i;ii++){
                         already.add(menus[ii]);
                     }
-                    System.out.println("--------------------------------");
+                    //System.out.println("--------------------------------");
                     dfs(c, menus,String.valueOf(menus[i]),menus[i],already);
                     already.clear();
                 }
@@ -80,8 +80,8 @@ public class App {
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,char menu,List<Character>already) {
-        System.out.println(already.toString());
-        System.out.println("str: "+str);
+       // System.out.println("str: "+str);
+       // System.out.println(already.toString());
         //문자열 길이가 조건길이인지 확인
         if(len==str.length()){
            // System.out.println("정답");
@@ -89,17 +89,13 @@ public class App {
             int count=Optional.ofNullable(menuAndNums.get(str)).orElseGet(()->0);
             count++;
             menuAndNums.put(str, count);
-            //재사용을 위해 지워줘야지 이전에 백준 false 처리 해줬던 것처럼
-            for(int i=1;i<already.size();i++){
-                already.remove(i);
-            }
             return;
         }
         //재귀호출
         for(int i=0;i<menus.length;i++){
             char a=menus[i];
             //이미 있다면 무시
-            if(already.contains(a)){
+            if(str.contains(String.valueOf(a))||a<menu){
                 continue;
             }
             //아니라면 넣어주기 중복 확인 방지
