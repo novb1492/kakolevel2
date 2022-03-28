@@ -16,8 +16,8 @@ public class App {
     static List<String>menuStrings=new ArrayList<>();
     static Map<Integer,Integer>topInLen=new HashMap<>();
     public static void main(String[] args) throws Exception {
-       String[] s={"ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD"};
-       int[] c={2,3,5};
+       String[] s={"XYZ", "XWY", "WXA"};
+       int[] c={2,3,4};
         System.out.println(Arrays.toString(solution(s,c)));
     }
     public static String[] solution(String[] orders, int[] course) {
@@ -55,10 +55,31 @@ public class App {
         }
         Collections.sort(topMenusInLen);
         System.out.println(topMenusInLen.toString());
+        List<String>removes=new ArrayList<>();
         //최소 두명이상에게 주문되었나확인하기
-        for(String order:orders){
-            
+        for(String topMenu:topMenusInLen){
+            char[] topMenus=topMenu.toCharArray();
+            int num=0;
+            boolean flag=false;
+            for(char menu:topMenus){
+                for(String order:orders){
+                    if(order.contains(String.valueOf(menu))){
+                        num+=1;
+                    }
+                }
+                if(num<2){
+                    System.out.println(topMenu);
+                    flag=true;
+                    break;
+                }else{
+                    num=0;
+                }
+            }
+            if(flag){
+                removes.add(topMenu);
+            }
         }
+        System.out.println(removes.toString());
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,char menu,List<Character>already) {
@@ -79,6 +100,7 @@ public class App {
             if(count2<=count){
                 topInLen.put(len,count);
             }
+            //재사용을 위해 지워줘야지 이전에 백준 false 처리 해줬던 것처럼
             already.remove(already.indexOf(menu));
             return;
         }
