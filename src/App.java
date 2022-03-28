@@ -14,10 +14,9 @@ public class App {
     static LinkedHashMap<String,Integer>menuAndNums=new LinkedHashMap<>();
     static int num2=0;
     static List<String>menuStrings=new ArrayList<>();
-    static Map<Integer,Integer>topInLen=new HashMap<>();
     public static void main(String[] args) throws Exception {
-       String[] s={"XYZ", "XWY", "WXA"};
-       int[] c={2,3,4};
+       String[] s={"ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD"};
+       int[] c={2,3,5};
         System.out.println(Arrays.toString(solution(s,c)));
     }
     public static String[] solution(String[] orders, int[] course) {
@@ -43,13 +42,31 @@ public class App {
 
         }
         System.out.println(menuAndNums.toString());
+        Map<Integer,Integer>topInLen=new HashMap<>();      
+        for(Entry<String, Integer> menuAndNum:menuAndNums.entrySet()){
+            int len=menuAndNum.getKey().length();
+            int topCount=Optional.ofNullable(topInLen.get(len)).orElseGet(()->0);
+            if(topCount<menuAndNum.getValue()){
+                topInLen.put(len, menuAndNum.getValue());
+            }
+        }
         System.out.println(topInLen.toString());
-        //가장많이 주문된 개수 분류하기
+        
         List<String>topMenusInLen=new ArrayList<>();
+        for(Entry<String, Integer> menuAndNum:menuAndNums.entrySet()){
+            if(menuAndNum.getValue()==topInLen.get(menuAndNum.getKey().length())&&menuAndNum.getValue()!=1){
+                topMenusInLen.add(menuAndNum.getKey());
+            }
+        }
+        Collections.sort(topMenusInLen);
+        System.out.println(topMenusInLen.toString());
+        answer=topMenusInLen.toArray(new String[topMenusInLen.size()]);
+        //가장많이 주문된 개수 분류하기
+       /* List<String>topMenusInLen=new ArrayList<>();
         for(Entry<String, Integer> menuAndNum:menuAndNums.entrySet()){
             String menu=menuAndNum.getKey();
             int topCount=topInLen.get(menu.length());
-            if(topCount==1){
+            if(topCount<=1){
                 continue;
             }
             if(topCount==menuAndNum.getValue()){
@@ -57,8 +74,8 @@ public class App {
             }
         }
         Collections.sort(topMenusInLen);
-        //System.out.println(topMenusInLen.toString());
-        answer=topMenusInLen.toArray(new String[topMenusInLen.size()]);
+        System.out.println(topMenusInLen.toString());
+        answer=topMenusInLen.toArray(new String[topMenusInLen.size()]);*/
         return answer;
     }
     private static void dfs(int len,char[]menus,String str,char menu,List<Character>already) {
@@ -69,16 +86,7 @@ public class App {
             //System.out.println("str: "+str);
             int count=Optional.ofNullable(menuAndNums.get(str)).orElseGet(()->0);
             count++;
-            if(count==1){
-                menuAndNums.put(str, count);
-            }else{
-                menuAndNums.replace(str,  count);
-            }
-            // 길이에 가장 많은 카운트 저장
-            int count2=Optional.ofNullable(topInLen.get(len)).orElseGet(()->0);
-            if(count2<=count){
-                topInLen.put(len,count);
-            }
+            menuAndNums.put(str, count);
             //재사용을 위해 지워줘야지 이전에 백준 false 처리 해줬던 것처럼
             already.remove(already.indexOf(menu));
             return;
