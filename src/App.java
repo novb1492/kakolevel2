@@ -39,23 +39,25 @@ public class App {
                 break;
             }
         }
+        u=")(";
         System.out.println("u: "+u);
         System.out.println("v: "+v);
         char[] uArr=u.toCharArray();
         char[] vArr=v.toCharArray();
-        List<Boolean>uFlag=new ArrayList<>();
-        List<Boolean>vFlag=new ArrayList<>();
         int uArrLen=u.length();
-        for(int i=0;i<uArrLen;i++){
-            char uu=uArr[i];
-            if(uu=='('){
-                uFlag.add(true);
-            }else{
-                uFlag.add(false);
+        boolean uResult=check(uArr, uArrLen);
+        System.out.println(uResult);
+        return answer;
+    }
+    private static boolean check(char[]arr,int len) {
+        for(int i=0;i<len/2;i++){
+            System.out.println(arr[i]);
+            System.out.println(arr[len-1-i]);
+            if(arr[i]==arr[len-1-i]){
+                return false;
             }
         }
-        System.out.println(uFlag.toString());
-        return answer;
+        return true;
     }
     
 
