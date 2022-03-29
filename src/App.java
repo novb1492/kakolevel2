@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        String s="()))((()";
+        String s="(()())()";
         System.out.println("r: "+solution(s));
     }
     public static String solution(String p) {
@@ -39,9 +39,22 @@ public class App {
                 break;
             }
         }
-        System.out.println(u);
-        System.out.println(v);
-        
+        System.out.println("u: "+u);
+        System.out.println("v: "+v);
+        char[] uArr=u.toCharArray();
+        char[] vArr=v.toCharArray();
+        List<Boolean>uFlag=new ArrayList<>();
+        List<Boolean>vFlag=new ArrayList<>();
+        int uArrLen=u.length();
+        for(int i=0;i<uArrLen;i++){
+            char uu=uArr[i];
+            if(uu=='('){
+                uFlag.add(true);
+            }else{
+                uFlag.add(false);
+            }
+        }
+        System.out.println(uFlag.toString());
         return answer;
     }
     
