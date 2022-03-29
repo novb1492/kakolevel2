@@ -15,7 +15,7 @@ import javax.print.DocFlavor.STRING;
 public class App {
     static String result="";
     public static void main(String[] args) throws Exception {
-        String s="()))((()";
+        String s=")()(()";
         System.out.println("r: "+solution(s));
     }
     public static String solution(String p) {
