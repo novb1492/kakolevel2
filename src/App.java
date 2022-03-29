@@ -10,16 +10,73 @@ import java.util.Stack;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import javax.print.DocFlavor.STRING;
+
 public class App {
+    static String result="";
     public static void main(String[] args) throws Exception {
-        String s="(()())()";
+        String s="()))((()";
         System.out.println("r: "+solution(s));
     }
     public static String solution(String p) {
         String answer = "";
-        Stack<Character>stacks=new Stack<>();
         char[] arr=p.toCharArray();
-        //스택에 다넣기
+        Stack<Character>stacks=check(arr);
+        //스택이 비어있다면 초기상태가 올바른 괄호문자열임
+        if(stacks.empty()){
+            return p;
+        }
+        String a=String.valueOf(arr);
+        boolean[] temp=new boolean[p.length()];
+        List<Integer>indexs=new ArrayList<>();
+        String fix="";
+        int count=0;
+        while(true){
+            int r=division(a);
+            if(r==-1){
+                fix=a;
+                break;
+            }
+            indexs.add(r+count*2);
+            String aa="";
+            char[] aaa=a.toCharArray(); 
+            for(int i=0;i<a.length();i++){
+                if(i==r){
+                    temp[r+count*2]=true;
+                    count++;
+                }else if(i==r+1){
+                    continue;
+                }
+                else{
+                    aa=aa+aaa[i];
+                }
+            }
+            a=aa;
+        } 
+        System.out.println(Arrays.toString(temp));      
+        System.out.println(indexs.toString());
+        System.out.println(fix);
+        int len=fix.length();
+        while(true){
+            int i=len/2;
+            System.out.println("half: "+i);
+            char[] fixs=fix.toCharArray();
+            String aa="";
+            String bb="";
+            if(fixs[i-1]!='('){
+                aa="(";
+            }
+            if(fixs[i-1]!=')'){
+                bb=")";
+            }
+            String s=aa+bb;
+            System.out.println(s);
+            break;
+        }
+        return answer;
+    }
+    private static Stack<Character> check(char[]arr) {
+        Stack<Character>stacks=new Stack<>();
         for(char c:arr){
             if(stacks.size()>=1){
                 char a=stacks.peek();
@@ -34,39 +91,10 @@ public class App {
             }
            
         }
-        //역으로 꺼내면서 확인
-        if(stacks.empty()){
-            return p;
-        }
-        
-        
-        return answer;
+        return stacks;
     }
+    private static int division(String p) {
+       return p.indexOf("()");
 
-    private static Map<String,String> getUandV(int len,char[] arr) {
-        int num=0;
-        int num2=0;
-        String u="";
-        String v="";
-        Map<String,String>uAndV=new HashMap<>();
-        for(int i=0;i<len;i++){
-            char aaa=arr[i];
-            u=u+aaa;
-            if(aaa=='('){
-                num+=1;
-            }else{
-                num2+=1;
-            }
-            if(num==num2){
-                //같다면 기준으로 분리
-                for(int ii=i+1;ii<len;ii++){
-                    v=v+arr[ii];
-                }
-                break;
-            }
-        }
-        uAndV.put("u", u);
-        uAndV.put("v", v);
-        return uAndV;
     }
 }
