@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        String s="(()())()";
+        String s="()))((()";
         System.out.println("r: "+solution(s));
     }
     public static String solution(String p) {
