@@ -32,20 +32,23 @@ public class App {
         String fix="";
         int count=0;
         while(true){
+            //'()'로일치하는 문자열찾기
             int r=division(a);
+            //더는 없다면 탈출
             if(r==-1){
                 fix=a;
                 break;
             }
-            indexs.add(r+count*2);
+            //있다면 '()'중 '('위치저장 )는 +1하면되니 
+            indexs.add(r+count*2);//count*2는 문자열이 2개 씩 감소하기 때문에
             String aa="";
             char[] aaa=a.toCharArray(); 
             for(int i=0;i<a.length();i++){
-                if(i==r){
-                    temp[r+count*2]=true;
+                if(i==r){//'()'중 '('인 위치만 true
+                    temp[r+count*2]=true;//count*2는 문자열이 2개 씩 감소하기 때문에
                     count++;
                 }else if(i==r+1){
-                    continue;
+                    continue;//aa에 ')'값이 안붙도록
                 }
                 else{
                     aa=aa+aaa[i];
@@ -66,7 +69,7 @@ public class App {
             if(fixs[i-1]!='('){
                 aa="(";
             }
-            if(fixs[i-1]!=')'){
+            if(fixs[i]!=')'){
                 bb=")";
             }
             String s=aa+bb;
