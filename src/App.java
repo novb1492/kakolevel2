@@ -10,17 +10,31 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class App {
-    static List<Character>menuArr=new ArrayList<>();
-    static LinkedHashMap<String,Integer>menuAndNums=new LinkedHashMap<>();
-    static int num2=0;
-    static List<String>menuStrings=new ArrayList<>();
     public static void main(String[] args) throws Exception {
         String s="(()())()";
         System.out.println("r: "+solution(s));
     }
     public static String solution(String p) {
         String answer = "";
+        char[] arr=p.toCharArray();
+        int num=0;
+        int num2=0;
+        String aa="";
+        for(char a:arr){
+            aa=aa+a;
+            if(a=='('){
+                num+=1;
+            }else{
+                num2+=1;
+            }
+            if(num==num2){
+                System.out.println(aa);
+                break;
+            }
+        }
+        
         return answer;
     }
+    
 
 }
