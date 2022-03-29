@@ -17,12 +17,23 @@ public class App {
     public static String solution(String p) {
         String answer = "";
         char[] arr=p.toCharArray();
+        Map<String,String>uAndV=getUandV(arr.length, arr);
+        String u=uAndV.get("u");
+        String v=uAndV.get("v");
+        System.out.println("u: "+u);
+        System.out.println("v: "+v);
+        //시작은 무조건 true 부터야함 true=(
+       
+        
+        
+        return answer;
+    }
+    private static Map<String,String> getUandV(int len,char[] arr) {
         int num=0;
         int num2=0;
         String u="";
         String v="";
-        int len=arr.length;
-        //괄호 수가 서로 같을 때까지 탐색
+        Map<String,String>uAndV=new HashMap<>();
         for(int i=0;i<len;i++){
             char aaa=arr[i];
             u=u+aaa;
@@ -39,26 +50,21 @@ public class App {
                 break;
             }
         }
-        u=")(";
-        System.out.println("u: "+u);
-        System.out.println("v: "+v);
-        char[] uArr=u.toCharArray();
-        char[] vArr=v.toCharArray();
-        int uArrLen=u.length();
-        boolean uResult=check(uArr, uArrLen);
-        System.out.println(uResult);
-        return answer;
+        uAndV.put("u", u);
+        uAndV.put("v", v);
+        return uAndV;
     }
-    private static boolean check(char[]arr,int len) {
-        for(int i=0;i<len/2;i++){
-            System.out.println(arr[i]);
-            System.out.println(arr[len-1-i]);
-            if(arr[i]==arr[len-1-i]){
-                return false;
+    private static List<Boolean> check(char[]arr,int len) {
+        List<Boolean>flags=new ArrayList<>();
+        for(int i=0;i<len;i++){
+            char uu=arr[i];
+            if(uu=='('){
+                flags.add(true);
+            }else{
+                flags.add(false);
             }
         }
-        return true;
+        return flags;
     }
-    
 
 }
